@@ -1,0 +1,86 @@
+<html>
+<head>
+
+<style type="text/css">
+  div {cursor: pointer; border: 1px solid black; width: 250px;}
+  input {background-color: white; border: 1px solid black; }
+</style>
+ 
+<script src="http://www.google.com/jsapi"></script>
+<script>
+  google.load("prototype", "1.6");
+  google.load("scriptaculous", "1.8.2");
+</script>
+
+</head>
+<body>
+Example how to use <a href="http://script.aculo.us">scriptaculous</a>.<br />
+You can either download scriptaculous and use it on your local server, or you can<br />
+use <a href="http://code.google.com/apis/ajaxlibs/">Google AJAX Libraries API</a> to invoke it (as 
+used in this 
+example).<br /><br />
+<div id="appear">
+im dissapearing! help !<br />
+woah!
+</div>
+
+
+<div style="" id="test" onclick="Effect.BlindDown('appear');">
+Click here....<br />
+scriptaculo Effect.BlindDown....
+</div>
+
+<script>
+Effect.BlindUp('appear');
+</script>
+
+
+
+<br /><br /><br /><br /><br />
+now lets test some AJAX with prototype...<br />
+Please note that you would only need the prototype.js.<br />
+Scriptaculous on the other hand, needs both prototype.js and scriptaculous.js...
+<br /><br />
+The content below is loaded via an AJAX GET request....<br /><br />
+
+<script>
+var url = "get.php";
+var params = "action=getFruits";
+
+var ajax = new Ajax.Updater({success: 'ajaxResult'}, url, 
+                            {method: 'get', parameters: params});
+</script>
+<div id="ajaxResult"></div>
+
+<br />
+<br />
+
+And the content below are generated from a AJAX POST request....<br /><br />
+
+<script>
+
+function login() {
+  var purl = "post.php";
+  var pams = "usr=" + document.getElementById('u').value + "&psw=" + 
+document.getElementById('p').value;
+
+  var pajax = new Ajax.Updater({success: 'postRes'}, purl, {method: 'post', parameters: pams, 
+                              onSuccess: result});
+
+  return result();
+}
+
+function result(xhr) {
+  //you could do stuff with the parameter here....
+}
+</script>
+<div id="postRes"></div>
+
+<br /><br />
+
+usr: <input type="text" id="u" name="usr" /> psw:<input type="password" id="p" id="pws" />
+<br />
+<input type="submit" value="login" onclick="login()" />
+
+</body>
+</html>
